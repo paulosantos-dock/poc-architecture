@@ -8,13 +8,15 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-class FindUserService implements FindUser {
+class FindUserService implements FindUserUseCase {
 
     private final List<FindUserDataProvider> findUserDataProviders;
 
     @Override
-    public boolean exists(final String name) {
-        return false;
+    public boolean exists(final String name, final String issuer) {
+        return getDataProvider(DataProviderEnum.fromValue(issuer))
+                .findByName(name)
+                .isPresent();
     }
 
     @Override
