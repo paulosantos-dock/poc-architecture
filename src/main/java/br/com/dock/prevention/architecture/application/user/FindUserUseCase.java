@@ -1,6 +1,6 @@
-package br.com.dock.prevention.architecture.domain.usecase.finduser;
+package br.com.dock.prevention.architecture.application.user;
 
-import br.com.dock.prevention.architecture.domain.entity.User;
+import br.com.dock.prevention.architecture.domain.model.user.User;
 import java.util.List;
 
 public interface FindUserUseCase {

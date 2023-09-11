@@ -1,14 +1,7 @@
-package br.com.dock.prevention.architecture.infra.dataprovider.database;
+package br.com.dock.prevention.architecture.port.adapter.persistence;
 
-import br.com.dock.prevention.architecture.domain.entity.User;
-import br.com.dock.prevention.architecture.domain.usecase.DataProviderEnum;
-import br.com.dock.prevention.architecture.domain.usecase.finduser.FindUserDataProvider;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Stream;
-
+import br.com.dock.prevention.architecture.domain.model.user.User;
+import br.com.dock.prevention.architecture.domain.model.user.UserRepository;
 import jakarta.persistence.*;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -17,17 +10,21 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
+
 @Component
 @RequiredArgsConstructor
-class FindUserDataBase implements FindUserDataProvider {
+class JpaUserRepository implements UserRepository {
 
-    private final FindUserRepository repository;
+    private final FindUserJpaRepository repository;
     private final UserMapper mapper;
 
     @Override
-    public Optional<User> findByName(final String name) {
-        return repository.findByName(name)
-                .map(mapper::toUser);
+    public boolean exists(String name) {
+        return this.findByName(name).isPresent();
     }
 
     @Override
@@ -39,9 +36,9 @@ class FindUserDataBase implements FindUserDataProvider {
                 .toList();
     }
 
-    @Override
-    public boolean supports(final DataProviderEnum dataProviderEnum) {
-        return dataProviderEnum == DataProviderEnum.DATABASE;
+    public Optional<User> findByName(final String name) {
+        return repository.findByName(name)
+                .map(mapper::toUser);
     }
 }
 
@@ -51,7 +48,7 @@ interface UserMapper {
 }
 
 @Repository
-interface FindUserRepository extends JpaRepository<UserPO, Long> {
+interface FindUserJpaRepository extends JpaRepository<UserPO, Long> {
     Optional<UserPO> findByName(String name);
 }
 
