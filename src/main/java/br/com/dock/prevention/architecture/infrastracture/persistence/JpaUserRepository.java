@@ -1,7 +1,7 @@
-package br.com.dock.prevention.architecture.port.adapter.persistence;
+package br.com.dock.prevention.architecture.infrastracture.persistence;
 
-import br.com.dock.prevention.architecture.domain.model.user.User;
-import br.com.dock.prevention.architecture.domain.model.user.UserRepository;
+import br.com.dock.prevention.architecture.domain.model.User;
+import br.com.dock.prevention.architecture.domain.UserRepository;
 import jakarta.persistence.*;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -17,9 +17,10 @@ import java.util.stream.Stream;
 
 @Component
 @RequiredArgsConstructor
+// DB Access Service
 class JpaUserRepository implements UserRepository {
 
-    private final FindUserJpaRepository repository;
+    private final SpringDataUserRepository repository;
     private final UserMapper mapper;
 
     @Override
@@ -48,7 +49,7 @@ interface UserMapper {
 }
 
 @Repository
-interface FindUserJpaRepository extends JpaRepository<UserPO, Long> {
+interface SpringDataUserRepository extends JpaRepository<UserPO, Long> {
     Optional<UserPO> findByName(String name);
 }
 

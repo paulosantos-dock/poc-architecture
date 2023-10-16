@@ -1,9 +1,9 @@
 package br.com.dock.prevention.architecture.resource;
 
-import br.com.dock.prevention.architecture.domain.model.user.User;
-import br.com.dock.prevention.architecture.application.user.CreateUserUseCase;
-import br.com.dock.prevention.architecture.application.user.FindUserUseCase;
-import br.com.dock.prevention.architecture.application.user.UserNotFoundException;
+import br.com.dock.prevention.architecture.domain.model.User;
+import br.com.dock.prevention.architecture.application.usecase.CreateUserUseCase;
+import br.com.dock.prevention.architecture.application.usecase.FindUserUseCase;
+import br.com.dock.prevention.architecture.application.exception.UserNotFoundException;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+// HTTP Adapter
 class UserController {
 
     private final CreateUserUseCase createUserUseCase;

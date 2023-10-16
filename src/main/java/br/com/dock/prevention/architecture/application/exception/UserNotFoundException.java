@@ -1,4 +1,4 @@
-package br.com.dock.prevention.architecture.application.user;
+package br.com.dock.prevention.architecture.application.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

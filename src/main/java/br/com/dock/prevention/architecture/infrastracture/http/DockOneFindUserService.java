@@ -1,7 +1,7 @@
-package br.com.dock.prevention.architecture.port.adapter.external;
+package br.com.dock.prevention.architecture.infrastracture.http;
 
-import br.com.dock.prevention.architecture.domain.model.user.User;
-import br.com.dock.prevention.architecture.domain.model.user.FindUserExternal;
+import br.com.dock.prevention.architecture.domain.model.User;
+import br.com.dock.prevention.architecture.domain.FindUserOutputPort;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.Mapper;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-class FindUserDockOne implements FindUserExternal {
+class DockOneFindUserService implements FindUserOutputPort {
 
     private final DockOneClient dockOneClient;
     private final UserMapper mapper;
